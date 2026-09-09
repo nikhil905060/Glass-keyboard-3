@@ -253,7 +253,6 @@ class GlassKeyboardService : InputMethodService() {
         globe.setImageResource(R.drawable.ic_globe)
         globe.background = null
         globe.isLongClickable = false
-        globe.tooltipText = null
         globe.layoutParams = LinearLayout.LayoutParams(dp(32), LinearLayout.LayoutParams.MATCH_PARENT)
         globe.setOnLongClickListener { true }
         globe.setOnClickListener {
@@ -271,7 +270,6 @@ class GlassKeyboardService : InputMethodService() {
         mic.setImageResource(R.drawable.ic_mic)
         mic.background = null
         mic.isLongClickable = false
-        mic.tooltipText = null
         mic.layoutParams = LinearLayout.LayoutParams(dp(32), LinearLayout.LayoutParams.MATCH_PARENT)
         mic.setOnLongClickListener { true }
         mic.setOnClickListener {
@@ -293,7 +291,6 @@ class GlassKeyboardService : InputMethodService() {
         btn.elevation = dp(1).toFloat()
         btn.isAllCaps = false
         btn.isLongClickable = false
-        btn.tooltipText = null
         btn.setOnLongClickListener { true }
         btn.setPadding(0, 0, 0, 0)
         val params = LinearLayout.LayoutParams(sizePx, sizePx)
@@ -336,7 +333,6 @@ class GlassKeyboardService : InputMethodService() {
         btn.elevation = dp(1).toFloat()
         btn.isAllCaps = false
         btn.isLongClickable = false
-        btn.tooltipText = null
         btn.setOnLongClickListener { true }
         val params = LinearLayout.LayoutParams(dp(widthDp), heightPx)
         params.marginEnd = dp(5)
@@ -360,7 +356,6 @@ class GlassKeyboardService : InputMethodService() {
         btn.background = bg
         btn.elevation = dp(1).toFloat()
         btn.isLongClickable = false
-        btn.tooltipText = null
         btn.setOnLongClickListener { true }
         val params = LinearLayout.LayoutParams(dp(widthDp), heightPx)
         params.marginEnd = dp(5)
@@ -385,7 +380,6 @@ class GlassKeyboardService : InputMethodService() {
         btn.elevation = dp(1).toFloat()
         btn.isAllCaps = false
         btn.isLongClickable = false
-        btn.tooltipText = null
         btn.setOnLongClickListener { true }
         btn.layoutParams = LinearLayout.LayoutParams(0, heightPx, 1f)
 
@@ -433,7 +427,6 @@ class GlassKeyboardService : InputMethodService() {
         btn.background = bg
         btn.elevation = dp(1).toFloat()
         btn.isLongClickable = false
-        btn.tooltipText = null
         btn.setOnLongClickListener { true }
         btn.layoutParams = LinearLayout.LayoutParams(dp(54), heightPx)
         btn.setOnClickListener {
@@ -528,7 +521,6 @@ class GlassKeyboardService : InputMethodService() {
         btn.setBackgroundColor(0)
         btn.maxLines = 1
         btn.isLongClickable = false
-        btn.tooltipText = null
         btn.setOnLongClickListener { true }
         btn.ellipsize = android.text.TextUtils.TruncateAt.END
         btn.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1f)
@@ -562,31 +554,9 @@ class GlassKeyboardService : InputMethodService() {
                 val text = items[index]
                 val preview = if (text.length > 18) text.take(18) + "…" else text
                 suggestionBar.addView(chip(preview) {
-                        currentInputConnection?.commitText(text, 1)
-                        clipboardMode = false
-                        renderSuggestions()
-                    })
+                    currentInputConnection?.commitText(text, 1)
+                    clipboardMode = false
+                    renderSuggestions()
+                })
                 if (index < items.size - 1) {
-                    suggestionBar.addView(divider())
-                }
-            }
-            return
-        }
-
-        val current = wordBuffer.toString()
-        val sugs = getSuggestions()
-        for (index in sugs.indices) {
-            val w = sugs[index]
-            val display = capitalizeLike(current, w)
-            suggestionBar.addView(chip(display) {
-                currentInputConnection?.deleteSurroundingText(current.length, 0)
-                currentInputConnection?.commitText("$display ", 1)
-                wordBuffer.clear()
-                renderSuggestions()
-            })
-            if (index < sugs.size - 1) {
-                suggestionBar.addView(divider())
-            }
-        }
-    }
-}
+   
