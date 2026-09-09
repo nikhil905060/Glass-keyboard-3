@@ -1,0 +1,10 @@
+<resources>
+    <color name="kb_bg">#F0F0F3</color>
+    <color name="key_bg">#FFFFFF</color>
+    <color name="key_bg_special">#ADB3BE</color>
+    <color name="key_bg_special_active">#8E94A0</color>
+    <color name="key_text">#1C1C1E</color>
+    <color name="preview_bg">#FFFFFF</color>
+    <color name="divider">#C7C9CE</color>
+    <color name="accent_blue">#4FB8F0</color>
+</resources>
