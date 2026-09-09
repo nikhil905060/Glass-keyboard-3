@@ -580,4 +580,6 @@ class GlassKeyboardService : InputMethodService() {
                 suggestionBar.addView(divider())
             }
         }
+    }
+}
    
