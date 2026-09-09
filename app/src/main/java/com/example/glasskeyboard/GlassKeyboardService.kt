@@ -1,4 +1,4 @@
-package com.example.glasskeyboard
+hupackage com.example.glasskeyboard
 
 import android.animation.ValueAnimator
 import android.content.ClipboardManager
@@ -561,4 +561,32 @@ class GlassKeyboardService : InputMethodService() {
             for (index in items.indices) {
                 val text = items[index]
                 val preview = if (text.length > 18) text.take(18) + "…" else text
-                su
+                suggestionBar.addView(chip(preview) {
+                        currentInputConnection?.commitText(text, 1)
+                        clipboardMode = false
+                        renderSuggestions()
+                    })
+                if (index < items.size - 1) {
+                    suggestionBar.addView(divider())
+                }
+            }
+            return
+        }
+
+        val current = wordBuffer.toString()
+        val sugs = getSuggestions()
+        for (index in sugs.indices) {
+            val w = sugs[index]
+            val display = capitalizeLike(current, w)
+            suggestionBar.addView(chip(display) {
+                currentInputConnection?.deleteSurroundingText(current.length, 0)
+                currentInputConnection?.commitText("$display ", 1)
+                wordBuffer.clear()
+                renderSuggestions()
+            })
+            if (index < sugs.size - 1) {
+                suggestionBar.addView(divider())
+            }
+        }
+    }
+}
