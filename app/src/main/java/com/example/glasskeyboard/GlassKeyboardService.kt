@@ -1,4 +1,4 @@
-hupackage com.example.glasskeyboard
+package com.example.glasskeyboard
 
 import android.animation.ValueAnimator
 import android.content.ClipboardManager
